@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml"><head>
+	<title>Eventbrite - Event Countdown Widget</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script async="" src="countdown-widget_data/analytics.js"></script><script type="text/javascript" defer="defer" src="countdown-widget_data/ga.js"></script><script type="text/javascript" src="countdown-widget_data/jsi18n_en-us.js" crossorigin="anonymous"></script>
+
+	<script type="text/javascript" src="countdown-widget_data/jquery-1.js" crossorigin="anonymous"></script>
+
+	<script type="text/javascript">
+		var currentWidget			= 'COUNTDOWN-IFRAME';
+		var currentWidgetreferral	= 'ecount';
+		var gDisableYuiLoader		= 1;
+		var gStartDate = '03/22/2017 10:00 AM GMT+0530';
+
+		
+	//=========================
+	//===== Color Options =====
+	//=========================
+	var userMessageColor 				= '#de302f';
+	var userBackgroundColor				= '#FFFFFF';
+	var userThinOutlineColor			= '#000000';
+	var userThickOutlineColor			= '#EEEEEE';
+	var userTextColor					= '#45494E';
+
+	var eventUserMessageColor 			= '#00A8F2';
+	var eventUserBackgroundColor		= '#F8F8FA';
+	var eventUserThinOutlineColor		= '#D2D6DF';
+	var eventUserThickOutlineColor		= '#EFF2F5';
+	var eventUserTextColor				= '#45494E';
+
+	var previousUserMessageColor 		= '#de302f';
+	var previousUserBackgroundColor		= '#FFFFFF';
+	var previousUserThinOutlineColor	= '#000000';
+	var previousUserThickOutlineColor	= '#EEEEEE';
+	var previousUserTextColor			= '#45494E';
+
+	var userMessageSize 		= '';
+	var googleToken;
+	var gClickOnCreateWidget	= 0;
+	var gSelectCurrentEID		= '31672385959'								; // == current event id
+	var gOriginalCurrentEID		= '31672385959'								; // == Original current event id
+    var gEventListed = 'n'; //  original event listed type
+    var baseUrl					= 'https://www.eventbrite.com'									; // == server Url
+	var gWidgetFooterLink 		= '';
+
+	var showPrivateEvents =  ('' === 'true');
+	var selectedEventDate = '';
+	var eventSig = '';
+	//===========================================
+	//===== Toggle CountDown Frame Component ====
+	//===========================================
+	if (currentWidget == 'CALENDAR'  || currentWidget == 'COUNTDOWN' || currentWidget == 'CALENDAR-IFRAME'  || currentWidget == 'COUNTDOWN-IFRAME') {
+		var gSelectComponent = {};
+		var gOriginalSelectComponent = {};
+gSelectComponent['eventbranding']=1;
+gSelectComponent['eventlogo']=1;
+gSelectComponent['eventname']=1;
+gSelectComponent['eventdate']=1;
+gSelectComponent['eventvenue']=1;
+gSelectComponent['eventlocation']=1;
+gSelectComponent['eventregister']=1;
+gSelectComponent['eventtweeter']=1;
+	}
+
+	//=====================================================
+	//== store all available Event and Start Date / EID ===
+	//=====================================================
+	if (currentWidget == 'CALENDAR' ||  currentWidget == 'CALENDAR-IFRAME') {
+		var gTabEventDate = new Array();
+		var gTabEventDateEID = new Array();
+		var gTabEventDateOrg = new Array();
+		var gTabNbrEventDate =  new Array();
+		var gTabHasPublicEventsDate = [];
+		var gTabEventDatePublicEID = [];
+		var gTabEventReference = {};
+		var gTabEventOrganizerReference = {};
+		var gTabEventOrganizerIdReference = {};
+		var gTabEventListedReference = {};
+		var gTabEventDateReference = {};
+		var gTabEventDateListReference = {};
+		var gTabEventSigReference = {};
+		var gTabEventSigDate = {};
+
+		var nbDate = -1;
+
+
+
+		//========================================
+		//=== Global Calendar Parameters	   ===
+
+			var gTotalFoundLiveEvent = 1 ;
+													  // == total number of Live events found for this user
+		var gSelectCalendarType = 'ALL'				; // == default Calendar type
+		var previousSelectCalendarType = 'ALL'		; // == default Calendar type  (original value)
+		var gFilterByOrganizer = ''															; // filter event date by Current organizer
+		var firstEventDate =  new Date('2017-03-22 10:00:00')					; // start date of current event
+		var gCurrentMonth = ''							; // current Calendar's Month
+		var gCurrentYear = ''								; // current Calendar's Year
+		var gOriginalMonth = ''							; // Original Calendar's Month
+		var gOriginalYear = ''								; // Original Calendar's Year
+		var gSelectCurrentOrganizer = '12806297939'  					; // == current event's Organizer
+		var gLastDisplayEvent = ''															;  // store   last Event ID displayed on Calendar
+		var gLastDisplayDateEvent = ''														;  // store   last Start Event date displayed on Calendar
+		var gLastDisplayOrg = ''															;  // store   last selected Organizer displayed on Calendar
+		var gLastDisplayListedType = '';
+		var gTwitterUrl = ''																;  // store current twitter Url
+
+		var gCurrentCalendarDate = new Date(gCurrentYear + '/' + PadDigits(gCurrentMonth,2) + '/01'); // Current Date YYYY/MM/DD (in JS Format)
+		var gCurrentOrganizer = ''					; // current Calendar's Organizer
+		var gLastMonth = gCurrentMonth														;
+		var gLastYear = gCurrentYear														;
+		var newDate = new Date()															;
+		var gActualYear =  newDate.getFullYear()											;  // new current Year
+		var gActualMonth =  newDate.getMonth() + 1											;  // new current Month
+		//===============================================
+		//== manage multiple event's per calendar Day ===
+		var gEventShortDates = ''                                							; // short date for Multiple event title
+		var	gNbrEventByDate = 0				   												; // nbr event for same date
+		var	gArrayEID		= new Array()   												; // Eid List
+		var	gArrayEventName = new Array()   												; // title List
+		var gArrayEventTime = new Array()													; // event start time
+		var gArrayEventOrganizer = new Array()												; // organlizer list if multiple event for same date
+		var gArrayEventLocation = new Array()												; // Event's location
+		var gCalendarSelectDate = ''														; // current calendar selected date
+		var gMaxEventPerDay = 20															; // max allowed event per day
+		var gLastCalendarDivSelected = ''													; // last Calendar Div selected
+	}
+
+	var iframeString = '';
+	var globalTableId = 0;
+	var gCptTextLink = 0;
+	var googleMyServices;
+	var gButtonWidthIframe = 250;
+	var gButtonHeightIframe = 500;
+
+	//======================================
+	//== Padding Function				===
+	//======================================
+	function PadDigits(n, totalDigits) {
+		n = n.toString();
+		var pd = '';
+		if (totalDigits > n.length) {
+			for (i=0; i < (totalDigits-n.length); i++) {
+				pd += '0';
+			}
+		}
+		return pd + n.toString();
+	}
+
+	EB.init({
+	    ebServer: 'https://www.eventbrite.com',
+	    ebDomain: 'eventbrite.com',
+	    ebCurrentSchemeServer: 'https://www.eventbrite.com',
+	    ebQueueServer: 'https://www.eventbrite.com',
+        mediaUrl: "https://cdn.evbstatic.com/s3-build/17449-rc2018-01-02_16.04-8581394/"
+	});
+
+	</script>
+
+    <script type="text/javascript" src="countdown-widget_data/widgets_countdown_iframe.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="countdown-widget_data/widget-css.css">
+</head>
+
+<body class="lang-en en-us yui-skin-sam">
+
+<div id="ebcountdown" style="display: block;">
+	<div class="innerbackground" id="innerbackground">
+		<div class="highlight"></div>
+		<div id="countdown">
+			<!-- Date from JS -->
+		</div>
+		<div class="calshadow"></div>
+							<div id="event_window_register">
+
+
+						<!-- NAME -->
+						<div class="ebeventname">
+								<a href="https://www.eventbrite.co.uk/e/agri-social-media-week-2018-7-8-february-tickets-41534171826?ref=ecount" target="_blank" id="display_eventname" style="display:block;">Agri Social Media Week 2018</a>
+						</div>
+
+						<!-- DATE -->
+						<div class="ebeventdate" id="display_eventdate" style="display:block;">
+							Wed, 7 Feb 2018, 11:00 –
+							Thu, 8 Feb 2018, 14:00 WAT
+						</div>
+
+						<!-- VENUE -->
+						<div class="ebeventvenue" style="display:none;">
+							<span id="display_eventvenue"></span>
+						</div>
+
+						<!-- LOCATION -->
+						<div class="ebeventlocation" style="display:none;">
+							<span id="display_eventlocation"></span>
+						</div>
+
+						<!-- REGISTER -->
+						<div class="registernowbutton">
+								<a href="https://www.eventbrite.co.uk/e/agri-social-media-week-2018-7-8-february-tickets-41534171826?ref=ecount" id="display_eventregister" title="Register Now!" target="_blank" style="display:block;">Register Now!</a>
+
+						</div>
+						
+						<!-- TWEET THIS -->
+						<div class="twatthisevent">
+							<a href="http://twitter.com/home?status=event+2017+--+https%3A%2F%2Fwww.eventbrite.com%2Fe%2Fagri-social-media-week-2018-7-8-february-tickets-41534171826" target="_blank" id="display_eventtweeter" style="display:block;">Tweet This Event</a>
+						</div>
+					</div>
+ 
+	</div>
+</div>
+
+<br>
+<div id="frt385959" style="text-align: center;">
+    
+</div>
+
+<script type="text/javascript">
+	document.getElementById('ebcountdown').style.display  = 'block';
+	countDownInitProcess('');
+	updateCountdown(gStartDate, 'eb_countdown', 'eb_count_down_mode', -1, true);
+</script>
+
+
+
+
+
+
+
+    
+
+		<script type="text/javascript">
+			function dhm(ms){
+				days = Math.floor(ms / (24*60*60*1000));
+				daysms=ms % (24*60*60*1000);
+				hours = Math.floor((daysms)/(60*60*1000));
+				hoursms=ms % (60*60*1000);
+				minutes = Math.floor((hoursms)/(60*1000));
+				minutesms=ms % (60*1000);
+				sec = Math.floor((minutesms)/(1000));
+				return "<b> " + days + " days remaining" + "</b>";
+			}
+			
+		var ddate = document.getElementById("countdown")
+		n = new Date()
+		l = new Date(2018, 1, 7, 11)
+		var rem = dhm(l-n)
+		ddate.innerHTML = rem
+		console.log(rem)
+
+        //<![CDATA[
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.defer = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+        var _gaq = _gaq || [];
+        //]]>
+        </script>
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-141520-1', {'allowLinker': true}, 'auto', {'useAmpClientId': true});
+
+            ga('set', 'forceSSL', true);
+
+            // Optimizely Universal Analytics Integration
+            window.optimizely = window.optimizely || [];
+            window.optimizely.push("activateUniversalAnalytics");
+        </script>
+
+
+
+    
+
+        <script>
+            // We want to track some custom dimensions on the event pages
+            // For that, we first check if we are in an event page
+            if (typeof(require) != 'undefined') {
+                require(['mediatorjs', 'underscore', 'eb/analytics'], function(mediatorjs, _, Analytics) {
+                    var isEvent = document.location.pathname.match('^/e\//*'),
+                        isNewListing,
+                        public_id,
+                        eventOwnerUserId,
+                        dimensions = {};
+
+                    Analytics.setInternalUseGACookie();
+                    Analytics.trackPendingInternalLink('ebEventToTrack');
+
+                    dimensions['dimension14'] = null;
+                    dimensions['dimension24'] = 'de57256e_157338a9cdcbdd24096980877ba434ede8eec7bf1426c4dd92ca562d8601b6f5ef4edcf1bde97f2b2f8e3e9bfd1fc1da';
+
+                    // TODO: move these dimensions to the event pages instead of checking on every page.
+                    if(isEvent){
+
+                        dimensions.dimension12 = public_id;
+                        dimensions.dimension21 = isNewListing ? 'NewListing' : 'OldListing';
+
+
+                        dimensions.dimension28 = eventOwnerUserId;
+                    }
+
+                    dimensions.dimension23 = location.search
+
+                    if (mediatorjs.get('GAPageviewDimensions')) {
+                        dimensions = _.extend(dimensions, mediatorjs.get('GAPageviewDimensions'));
+                    }
+                    Analytics.trackPageView(dimensions);
+                });
+            } else {
+                // This is for pages that don't have require (ie our widgets)
+                ga('send', 'pageview');
+            }
+        </script>
+        <script type="text/javascript">
+        if (window.EB && window.EB.Analytics) {
+            EB.Analytics.init(null);
+        }
+        </script>
+
+
+
+
+
+
+</body></html>

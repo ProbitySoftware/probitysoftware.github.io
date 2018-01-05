@@ -1,0 +1,659 @@
+/* CALENDAR and COUNTDOWN */
+/* 	#0d6d0d ===> 	userMessageColor       	===> #de302f (Link color)		*/
+/* 	#4c934c ===> 	userThinOutlineColor  	===> #000000    	*/
+/*	#f2fce3	===>	userBackgroundColor   	===> #FFFFFF	*/
+/*	#7ac17a	===>	userThickOutlineColor   ===> #EEEEEE		*/
+/*	#ffffff	===>	userTextColor   		===> #45494E (text color)		*/
+
+#ebcalendar
+	{
+		width:185px;
+		padding:5px;
+		font-family:Helvetica, Arial, sans-serif;
+		background-color:#EEEEEE;
+		-moz-border-radius:5px;
+		-webkit-border-radius:5px;
+		border-radius:5px;
+	}
+	
+#ebcalendar a, #ebcalendar a:active, #ebcalendar a:visited, #ebcalmultipledates
+	{
+		color:#45494E;
+		text-decoration:none;
+	}
+	
+#ebcalendar img
+	{
+		border:none;
+	}
+	
+#ebcalendar .clear
+	{
+		clear:both;
+	}
+	
+#ebcalendar .innerbackground
+	{
+		width:183px;
+		padding:8px 0 1px;
+		background-color:#FFFFFF;
+		border:1px #000000 solid;
+		-moz-border-radius:3px;
+		-webkit-border-radius:3px;
+		border-radius:3px;
+	}
+	
+#monthcontainer
+	{
+		width:183px;
+		height:17px;
+		font-size:16px;
+		line-height:16px;
+		font-weight:bold;
+		color:#45494E;
+		text-align:center;
+		margin:0 0 5px;
+		vertical-align:top;
+	}
+	
+#monthcontainer span
+	{
+		width:134px;
+		display:inline-block;
+		color:#45494E;
+	}
+	
+#monthcontainer a
+	{
+		width:14px;
+		height:14px;
+		font-size:12px;
+		line-height:12px;
+		font-weight:bold;
+		color:#FFFFFF;
+		background-color:#000000;
+		display:inline-block;
+		text-align:center;
+		-moz-border-radius:2px;
+		-webkit-border-radius:2px;
+		border-radius:2px;
+		vertical-align:top;
+	}
+	
+#monthcontainer a:hover
+	{
+		color:#de302f;
+		background-color:#EEEEEE;
+	}
+	
+#dayscontainer
+	{
+		width:183px;
+		margin:0 0 5px;
+	}
+	
+#dayscontainer ul
+	{
+		margin:0 0 0 1px;
+		padding:0px;
+		font-size:16px;
+		line-height:16px;
+		font-weight:bold;
+		color:#000000;
+	}
+	
+#dayscontainer ul li
+	{
+		width:25px;
+		padding:0px;
+		margin:0px;
+		float:left;
+		text-align:center;
+		list-style:none;
+	}
+
+#calendarbackground
+	{
+		clear:left;
+		width:183px;
+		padding:0 0 1px;
+		border-top:1px #000000 solid;
+		border-bottom:1px #000000 solid;
+	}
+	
+div>#calendarbackground
+	{
+		clear:left;
+		width:183px;
+		padding:0 0 1px;
+		background-color:#EEEEEE;
+		background-image: url(/static/images/manage/cal_gradient.png);
+		background-repeat:no-repeat;
+		background-position:top;
+		border-top:1px #000000 solid;
+		border-bottom:1px #000000 solid;
+	}
+		
+	
+#calendarbackground ul
+	{
+		margin:0 0 0 1px;
+		padding:0px;
+		font-size:15px;
+		line-height:23px;
+		font-weight:bold;
+		color:#45494E;
+	}
+	
+#calendarbackground ul li
+	{
+		width:22px;
+		height:24px;
+		padding:2px 1px 0px;
+		margin:0px;
+		display:inline-block;
+		float:left;
+		text-align:center;
+		list-style:none;
+		border-left:1px #EEEEEE solid;
+	}
+	
+#calendarbackground ul li a
+	{
+		width:21px;
+		height:21px;
+		display:inline-block;
+		background-color:#de302f;
+		color:#FFFFFF;
+		text-decoration:none;
+		-moz-border-radius:3px;
+		-webkit-border-radius:3px;
+		border-radius:3px;
+		
+	}
+	
+#calendarbackground ul li a:hover
+	{
+		display:inline-block;
+		background-color:#FFFFFF;
+		color:#de302f;
+		
+	}
+	
+#ebcalendar .calshadow
+	{
+		border-top:1px #000000 solid;
+	}
+	
+#ebcalendar .ebeventimage
+	{
+		width:173px;
+		margin:5px;
+		overflow:hidden;
+		text-align:center;
+		display:;
+	}
+	
+#ebcalendar .ebeventname
+	{
+		width:173px;
+		margin:15px 5px 5px;
+		overflow:hidden;
+		font-size:18px;
+		line-height:20px;
+		font-weight:bold;
+		text-align:center;
+		color:#45494E;
+	}
+
+	
+#ebcalendar .ebeventdate
+	{
+		width:173px;
+		margin:0 5px 5px;
+		font-size:11px;
+		line-height:14px;
+		text-align:center;
+		overflow:hidden;
+		color:#45494E;
+	}
+	
+#ebcalendar .ebeventvenue
+	{
+		width:165px;
+		margin:17px 5px 5px;
+		padding:0px 4px;
+		font-size:12px;
+		line-height:14px;
+		font-weight:bold;
+		text-align:center;
+		overflow:hidden;
+		color:#45494E;
+	}
+	
+#ebcalendar .ebeventlocation
+	{
+		width:165px;
+		margin:7px 5px 5px;
+		padding:0px 4px;
+		font-size:12px;
+		line-height:14px;
+		text-align:center;
+		overflow:hidden;
+		color:#45494E;
+	}
+	
+#ebcalendar .registernowbutton a
+	{
+		
+		width:122px;
+		height:19px;
+		margin:13px auto 0px;
+		font-size:12px;
+		line-height:20px;
+		font-weight:bold;
+		color:#FFFFFF;
+		text-align:center;
+		display:block;
+		background-color:#de302f;
+		-moz-border-radius:2px;
+		-webkit-border-radius:2px;
+		border-radius:2px;
+		
+	}
+	
+#ebcalendar .registernowbutton a:hover
+	{
+		color:#de302f;
+		background-color:#EEEEEE;
+		
+		
+	}
+	
+#ebcalendar .twatthisevent
+	{
+		width:165px;
+		margin:7px 5px 5px;
+		padding:0px 4px;
+		font-size:11px;
+		line-height:14px;
+		font-weight:bold;
+		text-align:center;
+		overflow:hidden;
+		color:#45494E;
+	}
+	
+#ebcalendar .ebpower
+	{
+		width:165px;
+		margin:7px 5px 5px;
+		padding:0px 4px;
+		font-size:10px;
+		line-height:10px;
+		text-align:center;
+		overflow:hidden;
+		color:#45494E;
+	}
+	
+/* --------------------------------------------------- */
+/* --- Multiple Events  Css                         -- */
+/* --------------------------------------------------- */
+
+#ebcalmultipledates h3
+	{
+		font-size:11px;
+		font-weight:bold;
+		text-align:center;
+		padding:4px 0px;
+		margin:0;
+		border-bottom:1px #000000 solid;
+		color:#45494E;
+	}
+	
+#ebcalmultipledates ul
+	{
+		display:;
+		list-style:none;
+		margin:0;
+		padding:0;
+		border-bottom:1px #EEEEEE solid;
+	}
+
+#ebcalmultipledates ul li
+	{
+		border-bottom:1px solid;
+		border-color:#000000;
+	}
+	
+#ebcalmultipledates ul li a
+	{
+		width:173px;
+		padding:6px 5px;
+		font-size:12px;
+		font-weight:bold;
+		display:block;
+		overflow:hidden;
+		color:#de302f;
+	}
+
+#ebcalmultipledates ul li a span
+	{
+		font-size:11px;
+		font-weight:normal;	
+	}
+	
+#ebcalmultipledates ul li a span span
+	{
+		font-size:10px;
+		color:#de302f;
+	}
+
+	
+#ebcalmultipledates ul li a:hover
+	{
+		background-color:#de302f;
+		color:#FFFFFF;
+		text-decoration:none;
+	}
+	
+#ebcalmultipledates ul li a img
+	{
+		margin-bottom:4px;
+		text-decoration:none;
+		border:none;
+	}
+	
+#ebcaleventlist
+	{
+		max-height:225px;
+		overflow:auto;	
+	}
+	
+#ebcaleventlist .ebcaleventdivider
+	{
+		margin:13px 0;
+		border-top:1px #000000 solid;
+		border-bottom:1px #EEEEEE solid;
+	}
+	
+/* ----  End Of Multiple Events  CSS                                --- */ 
+/* -------------------------------------------------------------------- */
+
+/* CALENDAR */
+
+#ebcountdown
+	{
+		width:185px;
+		padding:5px;
+		font-family:Helvetica, Arial, sans-serif;
+		background-color:#EEEEEE;
+		-moz-border-radius:5px;
+		-webkit-border-radius:5px;
+		border-radius:5px;
+		border-color:#EEEEEE;
+	}
+	
+#ebcountdown a, #ebcountdown a:active, #ebcountdown a:visited
+	{
+		color:#45494E;
+		text-decoration:none;
+	}
+	
+#ebcountdown img
+	{
+		border:none;
+	}
+	
+#ebcountdown .clear
+	{
+		clear:both;
+	}
+	
+#ebcountdown .innerbackground
+	{
+		width:183px;
+		padding:0px 0 1px;
+		background-color:#FFFFFF;
+		border:1px solid;
+		-moz-border-radius:3px;
+		-webkit-border-radius:3px;
+		border-radius:3px;
+		border-color: #000000;
+	}
+	
+	
+#countdown
+	{
+		width:183px;
+		padding:7px 0 0;
+		text-align:center;
+		-moz-border-radius-topleft:3px;
+		-webkit-border-top-left-radius:3px;
+		border-top-left-radius:3px;
+		-moz-border-radius-topright:3px;
+		-webkit-border-top-right-radius:3px;
+		border-top-right-radius:3px;
+		
+	}
+	
+.highlight
+	{
+		width:183px;
+		height:112px;
+		z-index:5;
+		position:absolute;
+		background-image: url(/static/images/manage/count_gradient.png);       
+		background-repeat:no-repeat;
+		background-position:top;
+		-moz-border-radius-topleft:3px;
+		-webkit-border-top-left-radius:3px;
+		border-top-left-radius:3px;
+		-moz-border-radius-topright:3px;
+		-webkit-border-top-right-radius:3px;
+		border-top-right-radius:3px;
+	}
+.highlight_IE6
+	{
+		width:183px;
+		height:112px;
+		z-index:200;
+		position:absolute;
+		background-repeat:no-repeat;
+		background-position:top;
+		-moz-border-radius-topleft:3px;
+		-webkit-border-top-left-radius:3px;
+		border-top-left-radius:3px;
+		-moz-border-radius-topright:3px;
+		-webkit-border-top-right-radius:3px;
+		border-top-right-radius:3px;
+	}
+	
+#countdown h1
+	{
+		font-size:88px;
+		letter-spacing:-2px;
+		line-height:88px;
+		color:#000000;
+		margin:0px;
+		padding:0px;
+	}
+	
+#countdown h2
+	{
+		font-size:24px;
+		letter-spacing:-2px;
+		line-height:24px;
+		color:#000000;
+		margin:12px;
+		padding:0px;
+	}
+	
+#countdown p
+	{
+		font-size:11px;
+		line-height:11px;
+		color:#000000;
+		margin:0 0 4px;
+		padding:0px;
+	}
+	
+#ebcountdown .calshadow
+	{
+		border-top:1px #000000 solid;
+	}
+
+#event_window_register {
+	padding-bottom: 10px;
+}
+	
+#ebcountdown .ebeventimage
+	{
+		width:173px;
+		margin:5px;
+		overflow:hidden;
+		text-align:center;
+	}
+	
+#ebcountdown .ebeventname
+	{
+		width:173px;
+		margin:15px 5px 5px;
+		overflow:hidden;
+		font-size:18px;
+		line-height:20px;
+		font-weight:bold;
+		text-align:center;
+		color:#45494E;
+	}
+	
+#ebcountdown .ebeventdate
+	{
+		width:173px;
+		margin:0 5px 5px;
+		font-size:11px;
+		line-height:14px;
+		text-align:center;
+		overflow:hidden;
+		color:#45494E;
+	}
+	
+#ebcountdown .ebeventvenue
+	{
+		width:165px;
+		margin: 0 5px;
+		padding:0px 4px;
+		font-size:12px;
+		line-height:14px;
+		font-weight:bold;
+		text-align:center;
+		overflow:hidden;
+		color:#45494E;
+	}
+
+#ebcountdown .ebeventvenue a {
+	margin: 13px 0 5px 0;
+}
+	
+#ebcountdown .ebeventlocation
+	{
+		width:165px;
+		margin:0 5px;
+		padding:0px 4px;
+		font-size:12px;
+		line-height:14px;
+		text-align:center;
+		overflow:hidden;
+		color:#45494E;
+	}
+
+#ebcountdown .ebeventlocation a {
+	margin: 7px 0 5px 0;
+}
+	
+#ebcountdown .registernowbutton a
+	{
+		
+		width:122px;
+		height:19px;
+		margin:13px auto 0px;
+		font-size:12px;
+		line-height:20px;
+		font-weight:bold;
+		color:#FFFFFF;
+		text-align:center;
+		display:block;
+		background-color:#de302f;
+		-moz-border-radius:2px;
+		-webkit-border-radius:2px;
+		border-radius:2px;
+		
+	}
+	
+#ebcountdown .registernowbutton a:hover
+	{
+		color:#de302f;
+		background-color:#EEEEEE;
+		
+		
+	}
+	
+#ebcountdown .twatthisevent
+	{
+		width:165px;
+		margin:0 5px;
+		padding:0px 4px;
+		font-size:11px;
+		line-height:14px;
+		font-weight:bold;
+		text-align:center;
+		overflow:hidden;
+		color:#45494E;
+	}
+
+#ebcountdown .twatthisevent a {
+	margin: 7px 0 5px 0;
+}
+
+	
+#ebcountdown .ebpower
+	{
+		width:165px;
+		margin:7px 5px 5px;
+		padding:0px 4px;
+		font-size:10px;
+		line-height:10px;
+		text-align:center;
+		overflow:hidden;
+		color:#45494E;
+	}
+
+#widget-branding {
+		width:<?cs var:mg.qdata.widget_main_border_width ?>px;
+		margin: 0 0 5px 0;
+		padding: 5px;
+		font-family: Helvetica, Arial, sans-serif;
+		font-size: 12px;
+		text-align: center;
+		background-color: #e6e6e6;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		border-radius: 5px;
+}
+
+#widget-branding .text {
+    position: relative;
+}
+
+#widget-branding a {
+    outline: none;
+    text-decoration: none;
+    color: #0f90ba;
+}
+
+#widget-branding a:hover {
+    text-decoration: underline;
+}
+
+#widget-branding a img {
+    border: none;
+}
